@@ -1,10 +1,5 @@
 # 🔋 EV Smart Battery Health & Thermal Failure Diagnostic System
 
-[![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
-[![SHAP](https://img.shields.io/badge/SHAP-Explainable_AI-000000?style=for-the-badge)](https://shap.readthedocs.io/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 An end-to-end, safety-critical machine learning system designed to monitor Electric Vehicle (EV) battery degradation, predict **State of Health (SoH %)**, classify **Thermal Failure Risks**, profile **Driver Charging Personas**, and provide model transparency through **SHAP (SHapley Additive exPlanations)**.
 
