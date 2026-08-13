@@ -24,13 +24,12 @@ Battery Management Systems (BMS) in modern EVs require proactive prognostics to 
                        Raw Telemetry / NASA Dataset                     
                                       |
                                       v
-                 
                          1. Preprocessing Pipeline     
                        (Cleaning, Shift, Features)
                                       |
                                       v
-                 |                                         |
-                 v                                         v
+                  |                                         |
+                  v                                         v
          2. Driver Clustering                   3. SoH % Regression         
        (K-Means Persona Profiling)          (GroupKFold, Cross-Validation)   
                                       |
