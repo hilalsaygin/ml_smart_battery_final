@@ -17,7 +17,47 @@ Battery Management Systems (BMS) in modern EVs require proactive prognostics to 
 5. **Interactive Dashboard**: Deploys serialized model artifacts via a 3-tab Streamlit web application with real-time risk alerts.
 
 ---
+## 🏗 System Architecture & Pipeline Flow
 
+```
+                     +----------------------------------+
+                     |  Raw Telemetry / NASA Dataset    |
+                     +----------------------------------+
+                                      |
+                                      v
+                     +----------------------------------+
+                     |    1. Preprocessing Pipeline     |
+                     |  (Cleaning, Shift, Features)     |
+                     +----------------------------------+
+                                      |
+                 +--------------------+--------------------+
+                 |                                         |
+                 v                                         v
++----------------------------------+     +----------------------------------+
+|      2. Driver Clustering        |     |      3. SoH % Regression         |
+|   (K-Means Persona Profiling)    |     | (GroupKFold, Cross-Validation)   |
++----------------------------------+     +----------------------------------+
+                 |                                         |
+                 +--------------------+--------------------+
+                                      |
+                                      v
+                     +----------------------------------+
+                     | 4. Thermal Failure Classification|
+                     | (SMOTE, Recall-Tuned Threshold)  |
+                     +----------------------------------+
+                                      |
+                                      v
+                     +----------------------------------+
+                     |  5. SHAP Explainability Engine   |
+                     |  (Beeswarm, Local Waterfalls)    |
+                     +----------------------------------+
+                                      |
+                                      v
+                     +----------------------------------+
+                     | 6. Streamlit Web Dashboard (App) |
+                     +----------------------------------+
+```
+---
 ## 🛠️ Key Engineering & Machine Learning Practices
 
 ### 1. Zero-Data-Leakage Architecture
