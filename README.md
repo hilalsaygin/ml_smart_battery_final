@@ -1,0 +1,41 @@
+# 🔋 EV Smart Battery Health & Thermal Failure Diagnostic System
+
+[![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![SHAP](https://img.shields.io/badge/SHAP-Explainable_AI-000000?style=for-the-badge)](https://shap.readthedocs.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
+An end-to-end, safety-critical machine learning system designed to monitor Electric Vehicle (EV) battery degradation, predict **State of Health (SoH %)**, classify **Thermal Failure Risks**, profile **Driver Charging Personas**, and provide model transparency through **SHAP (SHapley Additive exPlanations)**.
+
+---
+
+## 📌 Executive Summary
+
+Battery Management Systems (BMS) in modern EVs require proactive prognostics to prevent catastrophic thermal runaway events and optimize battery lifespan. This repository contains a modular Python package and an interactive Streamlit dashboard that translates raw electrochemical telemetry into actionable diagnostic insights.
+
+### Core Capabilities:
+1. **State of Health (SoH) Regression**: Predicts capacity degradation trends ($R^2 = 0.9842$, $\text{MAE} = 0.82\%$).
+2. **Safety-Tuned Thermal Failure Classification**: Identifies thermal failure risk using threshold optimization to achieve **Recall $\ge 90\%$**, prioritizing zero false negatives for safety.
+3. **Behavioral Driver Clustering**: Groups charging and speed telemetry into 3 operational archetypes via K-Means ($K=3$).
+4. **Explainable AI (XAI)**: Uses SHAP TreeExplainer to break down feature contributions for both global models and local edge-case predictions.
+5. **Interactive Dashboard**: Deploys serialized model artifacts via a 3-tab Streamlit web application with real-time risk alerts.
+
+---
+
+## 🛠️ Key Engineering & Machine Learning Practices
+
+### 1. Zero-Data-Leakage Architecture
+* **Battery-Grouped Splitting (`GroupShuffleSplit`)**: Splits train/validation/test sets strictly by unique `battery_id` rather than random row splits, preventing temporal leakage between cells.
+* **No Look-Ahead Feature Engineering**: Time-series impedance missing values are forward-filled (`ffill`). Historical features (e.g., 5-cycle capacity decay) are generated using shifted targets ($N-1$) so the model never observes future states.
+* **Pipeline SMOTE Integration**: Oversampling for imbalanced classification is wrapped inside `imbalanced-learn` Pipelines (`ImbPipeline`), ensuring SMOTE operates **strictly inside training folds** during cross-validation.
+
+### 2. Domain-Driven Feature Engineering
+* **Electrochemical Internal Resistance**: Aggregates Electrolyte Resistance ($R_e$) and Charge Transfer Resistance ($R_{ct}$) into Total Resistance ($R_{\text{total}} = R_e + R_{ct}$).
+* **Capacity Smoothing & Instability Volatility**: Applies Exponential Moving Averages ($\text{EMA}_5$) and rolling standard deviations ($\sigma_5$) to filter noise caused by capacity regeneration after long rest periods.
+
+### 3. Safety-Critical Decision Threshold Optimization
+Standard $0.50$ classification decision boundaries are unsuitable for safety-critical thermal runaway risks, where a False Negative leads to catastrophic failure. 
+* The classification pipeline evaluates decision thresholds across a precision-recall curve to lock in **Target Recall $\ge 0.90$** while maximizing the F1-Score.
+
+---
