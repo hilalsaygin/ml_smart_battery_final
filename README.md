@@ -1,7 +1,7 @@
 # 🔋 EV Smart Battery Health & Thermal Failure Diagnostic System
 
 
-An end-to-end, safety-critical machine learning system designed to monitor Electric Vehicle (EV) battery degradation, predict **State of Health (SoH %)**, classify **Thermal Failure Risks**, profile **Driver Charging Personas**, and provide model transparency through **SHAP (SHapley Additive exPlanations)**.
+An end-to-end, safety-critical machine learning system designed to monitor Electric Vehicle (EV) battery degradation, predict **State of Health (SoH %)**, classify **Thermal Failure Risks**, profile **Driver Charging Personas**, and provide model transparency through **SHAP (SHapley Additive Explanations)**.
 
 ---
 
