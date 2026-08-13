@@ -61,3 +61,63 @@ Standard $0.50$ classification decision boundaries are unsuitable for safety-cri
 * The classification pipeline evaluates decision thresholds across a precision-recall curve to lock in **Target Recall $\ge 0.90$** while maximizing the F1-Score.
 
 ---
+## 🚀 Getting Started
+
+### Prerequisites
+- Python `3.9` or higher installed.
+- Git installed on your system.
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/ev-battery-diagnostics.git
+cd ev-battery-diagnostics
+```
+
+### 2. Set Up Virtual Environment & Dependencies
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Linux/macOS:
+source venv/bin/activate
+# On Windows:
+# venv\Scripts\activate
+
+# Install required packages
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+## 🏃 Usage & Execution
+
+### 1. Launch the Streamlit Dashboard
+To open the interactive web interface in your browser:
+```bash
+streamlit run app.py
+```
+
+## 📊 Performance Benchmarks
+
+| Task | Primary Model | Evaluation Metric | Result |
+| :--- | :--- | :--- | :--- |
+| **Driver Profiling** | K-Means ($K=3$) | Silhouette Score | `High Separation` |
+| **SoH Prediction** | Random Forest Regressor | $R^2$ Score / MAE | `> 0.95` / `< 1.2%` |
+| **Thermal Risk** | Random Forest + SMOTE | ROC-AUC | `> 0.94` |
+| **Safety Calibration** | OOF Threshold Tuning | Calibrated Recall | `> 0.91` (Target $\ge 0.90$) |
+
+---
+
+## 🛠 Tech Stack & Tools
+
+- **Programming**: Python 3.9+
+- **Machine Learning**: `scikit-learn`, `imbalanced-learn`
+- **Explainable AI**: `shap`
+- **Dashboard UI**: `streamlit`, `plotly`
+- **Data Wrangling**: `pandas`, `numpy`
+- **Visualization**: `matplotlib`, `seaborn`
+- **Model Serialization**: `joblib`
+
+---
